@@ -1,8 +1,12 @@
 import React from 'react'
+import { PageLayout } from '../../components/layouts'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <h1>Home Page</h1>
+      {/* Other home page content */}
+    </div>
   )
 }
 
