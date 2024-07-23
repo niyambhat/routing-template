@@ -10,12 +10,11 @@ import { SystemUnavailable } from '../../views/SystemUnavailable';
 import { TermsOfService } from '../../views/TermsOfService';
 import { FAQ } from '../../views/FAQ';
 
-
 // <------------------>
 //  Routes
 // <------------------>
-export enum Pages {
-    About = "About Us",
+export enum PageNames {
+    About = "About",
     Contact = "Contact",
     Home = "Home",
     Products = "Our Products",
@@ -25,6 +24,21 @@ export enum Pages {
     TermsOfService = "Terms of Service"
 }
 
+export enum PageRoutes {
+    About = "about",
+    Contact = "contact",
+    Home = " ",
+    Products = "our-products",
+    Services = "our-services",
+    FAQ = "faq",
+    PrivacyPolicy = "privacy-policy",
+    TermsOfService = "terms-of-service"
+}
+
+export enum ErrorPageRoutes{
+    SessionTimeOut = "session-timed-out",
+    SystemUnavailable = "system-unavailable"
+}
 export enum ErrorPages {
     SessionTimeOut = "Session timed out",
     SystemUnavailable = "System unavailable"
@@ -35,12 +49,11 @@ export enum ErrorPageHeading {
     SystemUnavailable = "Oh no!"
 }
 
-export type AppRoute = Pages | ErrorPages;
+export type AppRoute = PageRoutes | ErrorPageRoutes;
 
-export const getRouteUrl = (route: AppRoute) => `${process.env.REACT_APP_PUBLIC_URL}/${route.toLowerCase().replace(/ /g, '-')}`;
+export const getRouteUrl = (route: AppRoute) => `${process.env.PUBLIC_URL}/${route}`;
 
-export const ERROR_SYSTEM_UNAVAILABLE_PAGE_URL = getRouteUrl(ErrorPages.SystemUnavailable);
-export const ERROR_SESSION_TIMEOUT_PAGE_URL = getRouteUrl(ErrorPages.SessionTimeOut);
+
 
 // <------------------>
 //  Route Information
@@ -58,7 +71,7 @@ export const pageRouteInfo: Record<Pages, RouteInformation> = {
         key: Pages.About,
         path: getRouteUrl(Pages.About),
         name: Pages.About,
-        element: <AboutUs />,
+        element: <AboutUs/>,
     },
     [Pages.Contact]: {
         key: Pages.Contact,
@@ -104,6 +117,13 @@ export const pageRouteInfo: Record<Pages, RouteInformation> = {
         element: <TermsOfService />,
     },
 };
+
+
+
+console.log('Privacy Policy Path:', pageRouteInfo[Pages.PrivacyPolicy].path);
+console.log('Generated Path:', getRouteUrl(Pages.PrivacyPolicy));
+
+
 
 export const errorRouteInfo: Record<ErrorPages, RouteInformation> = {
     [ErrorPages.SessionTimeOut]: {
